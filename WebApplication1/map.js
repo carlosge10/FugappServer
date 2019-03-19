@@ -62,7 +62,9 @@ function locateOnMap() {
 google.maps.event.addDomListener(window, 'load', initMap(52.357971, -6.516758));
 */
 var map, infoWindow;
+var latG, longG;
 function initMap() {
+    console.log("algo");
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 6
@@ -76,7 +78,8 @@ function initMap() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
+            latG = pos.lat;
+            longG = pos.lng;
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
@@ -98,7 +101,39 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
-function submitInfo()
-{
+const uri = "http://localhost:50079/";
 
+function submitTripInfo()
+{
+    console.log("submitting");
+    pageTracker._trackPageview('/thanks.html');
+    const item = {
+        Name: $("#name").val(),
+        Email: $("#email").val(),
+        Tel: $("#phone").val(),
+        Event: $("#event").val(),
+        Msg: $("#message").val(),
+        Start_long: latG,
+        Start_lat: longG,
+        Token: "123"
+    };
+    console.log(item);
+    $.ajax({
+        type: "POST",
+        accepts: "application/json",
+        url: uri + "api/Trip",
+        contentType: "application/json",
+        data: JSON.stringify(item),
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (result) {
+            console.log(result);
+            console.log(result["Token"]);
+            window.location.href = "/thanks.html";
+
+        }
+    });
 }

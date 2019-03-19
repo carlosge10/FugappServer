@@ -221,6 +221,7 @@
     <Content Include="img\team\1.jpg" />
     <Content Include="img\team\2.jpg" />
     <Content Include="img\team\3.jpg" />
+    <Content Include="thanks.html" />
     <Content Include="index.html" />
     <Content Include="js\agency.js" />
     <Content Include="js\agency.min.js" />
