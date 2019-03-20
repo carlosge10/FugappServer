@@ -106,7 +106,8 @@ const uri = "http://localhost:50079/";
 function submitTripInfo()
 {
     console.log("submitting");
-    pageTracker._trackPageview('/thanks.html');
+    var d = new Date();
+ //   pageTracker._trackPageview('/thanks.html');
     const item = {
         Name: $("#name").val(),
         Email: $("#email").val(),
@@ -115,7 +116,7 @@ function submitTripInfo()
         Msg: $("#message").val(),
         Start_long: latG,
         Start_lat: longG,
-        Token: "123"
+        Token: d.getTime()
     };
     console.log(item);
     $.ajax({

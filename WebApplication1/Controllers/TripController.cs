@@ -23,8 +23,16 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public HttpResponseMessage Post(Trip t)
         {
-            var response = Request.CreateResponse(System.Net.HttpStatusCode.Created, t);
-            return response;
+            try
+            {
+                bool correct = Trip.saveTrip(t);
+                var response = Request.CreateResponse(System.Net.HttpStatusCode.Created, t);
+                return response;
+            }
+            catch (Exception e) {
+                var response = Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, e);
+                return response;
+            } 
         }
     }
 }

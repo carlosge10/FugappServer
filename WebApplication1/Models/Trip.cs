@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace WebApplication1.Models
         public static bool saveTrip(Trip t) {
             try
             {
-                using (SqlConnection openCon = new SqlConnection("SQLServerConnectionString"))
+                using (SqlConnection openCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLServerConnectionString"].ConnectionString))
                 {
                     string save = "INSERT INTO Trip (Token, Name, Tel, Event, Msg, Lat, Long) VALUES (@Token, @Name, @Tel, @Event, @Msg, @Lat, @Long)";
 
