@@ -101,7 +101,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
-const uri = "http://localhost:50079/";
+const uri = "http://ninadev.com";
 
 function submitTripInfo()
 {
